@@ -6,12 +6,42 @@
     <string name="banner_ad_id"></string>
     <string name="interstitial_ad_id"></string>
 
+    <!--Katy Perry youtube channel-->
+    <!--<string-array name="channel_names">-->
+        <!--<item>KatyPerryVEVO</item>-->
+        <!--<item>VVV ft. Katy Perry</item>-->
+        <!--<item>Lyric Videos</item>-->
+        <!--<item>Official Music Videos</item>-->
+        <!--<item>Favorites</item>-->
+    <!--</string-array>-->
+
+    <!--<string-array name="video_types">-->
+    <!--<item>1</item>-->
+    <!--<item>2</item>-->
+    <!--<item>2</item>-->
+    <!--<item>2</item>-->
+    <!--<item>2</item>-->
+    <!--</string-array>-->
+
+    <!--<string-array name="channel_id">-->
+    <!--<item>UC-8Q-hLdECwQmaWNwXitYDw</item>-->
+    <!--<item>PLwiBGptTigOoE1owQjifaPKJLP9ysJmxR</item>-->
+    <!--<item>PLwiBGptTigOotmP&#45;&#45;NPj6lCEoGNq2OqiA</item>-->
+    <!--<item>PLwiBGptTigOof7ZhEIH_Pl8jksfvSM7oE</item>-->
+    <!--<item>FL-8Q-hLdECwQmaWNwXitYDw</item>-->
+    <!--</string-array>-->
+
+    <!--Lindsey Stirling youtube channel-->
     <string-array name="channel_names">
-        <item>KatyPerryVEVO</item>
-        <item>VVV ft. Katy Perry</item>
-        <item>Lyric Videos</item>
-        <item>Official Music Videos</item>
-        <item>Favorites</item>
+        <item>Lindsey Stirling</item>
+        <item>Original Music Videos</item>
+        <item>Cool Collabs</item>
+        <item>Gaming Music</item>
+        <item>Christmas</item>
+        <item>Classy Covers</item>
+        <item>Behind the Scenes</item>
+        <item>Recent Uploads</item>
+        <item>Lindsey Live</item>
     </string-array>
 
     <string-array name="video_types">
@@ -20,15 +50,22 @@
         <item>2</item>
         <item>2</item>
         <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="channel_id">
-        <!--<item>UC2pmfLm7iq6Ov1UwYrWYkZA</item>-->
-        <item>UC-8Q-hLdECwQmaWNwXitYDw</item>
-        <item>PLwiBGptTigOoE1owQjifaPKJLP9ysJmxR</item>
-        <item>PLwiBGptTigOotmP--NPj6lCEoGNq2OqiA</item>
-        <item>PLwiBGptTigOof7ZhEIH_Pl8jksfvSM7oE</item>
-        <item>FL-8Q-hLdECwQmaWNwXitYDw</item>
+        <item>UCyC_4jvPzLiSkJkLIkA7B8g</item>
+        <item>PL0805FB61D7503BC2</item>
+        <item>PLETuopLfmKSNa6FuUGxbPZN0QZWBA6CIW</item>
+        <item>PLETuopLfmKSPUH5qO7YjjEuwWO_T9RKZE</item>
+        <item>PLETuopLfmKSOb-nLxMHGa0tOLUjCGanEs</item>
+        <item>PL7901C8C232406C99</item>
+        <item>PLETuopLfmKSOrpzXznr19fqZk7I6idLQT</item>
+        <item>PLETuopLfmKSPXx-DAdq8fXA00WRb6rh1A</item>
+        <item>PL588B9D96E2D26A9A</item>
     </string-array>
 
     <string name="about">About app</string>
@@ -79,7 +116,7 @@
     <string name="subject">Рекомендую видеоуроки о создании мобильных приложений на канале Start Android!</string>
     <string name="message">Вы можете скачать приложение "Видеоуроки Start Android" для Android в </string>
 
-    <string name="new_videos">New videos</string>
+    <string name="new_videos">All videos</string>
 
 
 </resources>
