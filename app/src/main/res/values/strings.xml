@@ -23,7 +23,8 @@
     </string-array>
 
     <string-array name="channel_id">
-        <item>UC2pmfLm7iq6Ov1UwYrWYkZA</item>
+        <!--<item>UC2pmfLm7iq6Ov1UwYrWYkZA</item>-->
+        <item>UC-8Q-hLdECwQmaWNwXitYDw</item>
         <item>PLwiBGptTigOoE1owQjifaPKJLP9ysJmxR</item>
         <item>PLwiBGptTigOotmP--NPj6lCEoGNq2OqiA</item>
         <item>PLwiBGptTigOof7ZhEIH_Pl8jksfvSM7oE</item>
@@ -78,7 +79,7 @@
     <string name="subject">Рекомендую видеоуроки о создании мобильных приложений на канале Start Android!</string>
     <string name="message">Вы можете скачать приложение "Видеоуроки Start Android" для Android в </string>
 
-    <string name="new_videos">Новые видеоуроки</string>
+    <string name="new_videos">New videos</string>
 
 
 </resources>
