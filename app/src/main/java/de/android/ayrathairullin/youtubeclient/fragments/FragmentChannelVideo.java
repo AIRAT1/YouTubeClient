@@ -76,6 +76,8 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
 
     private boolean mIsFirstVideo = true;
 
+    private View mCoordinator;
+
     public interface OnVideoSelectedListener {
         public void onVideoSelected(String ID);
     }
@@ -90,6 +92,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
         mVideoType = Integer.parseInt(bundle.getString(Utils.TAG_VIDEO_TYPE));
         mChannelId = bundle.getString(Utils.TAG_CHANNEL_ID);
 
+        mCoordinator = view.findViewById(R.id.coordinator);
         mUltimateRecyclerView = view.findViewById(R.id.ultimate_recycler_view);
         mLblNoResult = view.findViewById(R.id.lblNoResult);
         mLytRetry = view.findViewById(R.id.lytRetry);
@@ -568,6 +571,13 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
             super.onPostExecute(aVoid);
             if (isAdmobVisible) {
                 adView.loadAd(adRequest);
+                adView.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdLoaded() {
+                        super.onAdLoaded();
+                        setupContentViewPadding(adView.getHeight());
+                    }
+                });
                 if (interstitialTrigger == Utils.ARG_TRIGGER_VALUE) {
                     interstitialAd.loadAd(interStitialAdRequest);
                     interstitialAd.setAdListener(new AdListener() {
@@ -591,5 +601,10 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                 }
             }
         }
+    }
+
+    private void setupContentViewPadding(int padding) {
+        mCoordinator.setPadding(mCoordinator.getPaddingLeft(), mCoordinator.getPaddingTop(),
+                mCoordinator.getPaddingRight(), padding);
     }
 }
