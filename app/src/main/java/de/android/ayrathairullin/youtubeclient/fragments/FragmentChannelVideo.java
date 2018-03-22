@@ -1,6 +1,7 @@
 package de.android.ayrathairullin.youtubeclient.fragments;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,9 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import com.marshalchen.ultimaterecyclerview.ItemTouchListenerAdapter;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
@@ -46,6 +50,8 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
     private CircleProgressBar mPrgLoading;
     private UltimateRecyclerView mUltimateRecyclerView;
 
+    private AdView adView;
+    private boolean isAdmobVisible;
 
     private int mVideoType;
     private String mChannelId;
@@ -57,7 +63,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
     private AdapterList mAdapterList = null;
 
     private ArrayList<HashMap<String, String>> mTempVideoData = new ArrayList<>();
-    private ArrayList<HashMap<String, String>> mVideoData     = new ArrayList<>();
+    private ArrayList<HashMap<String, String>> mVideoData = new ArrayList<>();
 
     private String mNextPageToken = "";
     private String mVideoIds = "";
@@ -83,12 +89,14 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
         mVideoType = Integer.parseInt(bundle.getString(Utils.TAG_VIDEO_TYPE));
         mChannelId = bundle.getString(Utils.TAG_CHANNEL_ID);
 
-        mUltimateRecyclerView       = (UltimateRecyclerView)
-                view.findViewById(R.id.ultimate_recycler_view);
-        mLblNoResult                = (TextView) view.findViewById(R.id.lblNoResult);
-        mLytRetry                   = (LinearLayout) view.findViewById(R.id.lytRetry);
-        mPrgLoading                 = (CircleProgressBar) view.findViewById(R.id.prgLoading);
-        AppCompatButton btnRetry    = (AppCompatButton) view.findViewById(R.id.raisedRetry);
+        mUltimateRecyclerView = view.findViewById(R.id.ultimate_recycler_view);
+        mLblNoResult = view.findViewById(R.id.lblNoResult);
+        mLytRetry = view.findViewById(R.id.lytRetry);
+        mPrgLoading = view.findViewById(R.id.prgLoading);
+        AppCompatButton btnRetry = view.findViewById(R.id.raisedRetry);
+
+        adView = view.findViewById(R.id.adView);
+        isAdmobVisible = Utils.admobVisibility(adView, Utils.IS_ADMOB_VISIBLE);
 
         btnRetry.setOnClickListener(this);
         mPrgLoading.setColorSchemeResources(R.color.accent_color);
@@ -96,7 +104,6 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
 
         mIsAppFirstLaunched = true;
         mIsFirstVideo = true;
-
 
 
         mVideoData = new ArrayList<>();
@@ -176,14 +183,13 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
     }
 
 
-
     private void getVideoData() {
 
         mVideoIds = "";
         final String[] videoId = new String[1];
 
         String url;
-        if(mVideoType == 2) {
+        if (mVideoType == 2) {
             url = Utils.API_YOUTUBE + Utils.FUNCTION_PLAYLIST_ITEMS_YOUTUBE +
                     Utils.PARAM_PART_YOUTUBE + "snippet,id&" +
                     Utils.PARAM_FIELD_PLAYLIST_YOUTUBE + "&" +
@@ -191,7 +197,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                     Utils.PARAM_PLAYLIST_ID_YOUTUBE + mChannelId + "&" +
                     Utils.PARAM_PAGE_TOKEN_YOUTUBE + mNextPageToken + "&" +
                     Utils.PARAM_MAX_RESULT_YOUTUBE + Utils.PARAM_RESULT_PER_PAGE;
-        }else {
+        } else {
             url = Utils.API_YOUTUBE + Utils.FUNCTION_SEARCH_YOUTUBE +
                     Utils.PARAM_PART_YOUTUBE + "snippet,id&" + Utils.PARAM_ORDER_YOUTUBE + "&" +
                     Utils.PARAM_TYPE_YOUTUBE + "&" +
@@ -209,10 +215,11 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                     JSONArray dataItemArray;
                     JSONObject itemIdObject, itemSnippetObject, itemSnippetThumbnailsObject,
                             itemSnippetResourceIdObject;
+
                     @Override
                     public void onResponse(JSONObject response) {
                         Activity activity = getActivity();
-                        if(activity != null && isAdded()){
+                        if (activity != null && isAdded()) {
                             try {
                                 dataItemArray = response.getJSONArray(Utils.ARRAY_ITEMS);
 
@@ -225,7 +232,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                                         itemSnippetObject = itemsObject.
                                                 getJSONObject(Utils.OBJECT_ITEMS_SNIPPET);
 
-                                        if(mVideoType == 2){
+                                        if (mVideoType == 2) {
                                             itemSnippetResourceIdObject = itemSnippetObject.
                                                     getJSONObject(Utils.OBJECT_ITEMS_SNIPPET_RESOURCEID);
                                             dataMap.put(Utils.KEY_VIDEO_ID,
@@ -236,7 +243,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
 
                                             mVideoIds = mVideoIds + itemSnippetResourceIdObject.
                                                     getString(Utils.KEY_VIDEO_ID) + ",";
-                                        }else {
+                                        } else {
                                             itemIdObject = itemsObject.
                                                     getJSONObject(Utils.OBJECT_ITEMS_ID);
                                             dataMap.put(Utils.KEY_VIDEO_ID,
@@ -247,7 +254,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                                                     getString(Utils.KEY_VIDEO_ID) + ",";
                                         }
 
-                                        if(mIsFirstVideo && i == 0) {
+                                        if (mIsFirstVideo && i == 0) {
                                             mIsFirstVideo = false;
                                             mCallback.onVideoSelected(videoId[0]);
                                         }
@@ -308,7 +315,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Activity activity = getActivity();
-                        if(activity != null && isAdded()){
+                        if (activity != null && isAdded()) {
                             Log.d(Utils.TAG + TAG, "on Error Response: " + error.getMessage());
                             try {
                                 String msgSnackBar;
@@ -345,20 +352,21 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
     }
 
     private void getDuration() {
-        String url = Utils.API_YOUTUBE+Utils.FUNCTION_VIDEO_YOUTUBE+
-                Utils.PARAM_PART_YOUTUBE+"contentDetails&"+
-                Utils.PARAM_FIELD_VIDEO_YOUTUBE+"&"+
-                Utils.PARAM_KEY_YOUTUBE+getResources().getString(R.string.youtube_apikey)+"&"+
-                Utils.PARAM_VIDEO_ID_YOUTUBE+mVideoIds;
+        String url = Utils.API_YOUTUBE + Utils.FUNCTION_VIDEO_YOUTUBE +
+                Utils.PARAM_PART_YOUTUBE + "contentDetails&" +
+                Utils.PARAM_FIELD_VIDEO_YOUTUBE + "&" +
+                Utils.PARAM_KEY_YOUTUBE + getResources().getString(R.string.youtube_apikey) + "&" +
+                Utils.PARAM_VIDEO_ID_YOUTUBE + mVideoIds;
 
         JsonObjectRequest request = new JsonObjectRequest(url, null,
                 new Response.Listener<JSONObject>() {
                     JSONArray dataItemArrays;
                     JSONObject itemContentObject;
+
                     @Override
                     public void onResponse(JSONObject response) {
                         Activity activity = getActivity();
-                        if(activity != null && isAdded()){
+                        if (activity != null && isAdded()) {
                             try {
                                 haveResultView();
                                 dataItemArrays = response.getJSONArray(Utils.ARRAY_ITEMS);
@@ -370,7 +378,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
 
                                         itemContentObject = itemsObjects.
                                                 getJSONObject(Utils.OBJECT_ITEMS_CONTENT_DETAIL);
-                                        mDuration         = itemContentObject.
+                                        mDuration = itemContentObject.
                                                 getString(Utils.KEY_DURATION);
 
                                         String mDurationInTimeFormat = Utils.
@@ -396,9 +404,8 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                                     mTempVideoData.clear();
                                     mTempVideoData = new ArrayList<>();
 
-                                }else {
-                                    if (mIsAppFirstLaunched && mAdapterList.getAdapterItemCount() <= 0)
-                                    {
+                                } else {
+                                    if (mIsAppFirstLaunched && mAdapterList.getAdapterItemCount() <= 0) {
                                         noResultView();
                                     }
                                     disableLoadmore();
@@ -419,7 +426,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Activity activity = getActivity();
-                        if(activity != null && isAdded()){
+                        if (activity != null && isAdded()) {
                             Log.d(Utils.TAG + TAG, "on Error Response: " + error.getMessage());
                             try {
                                 String msgSnackBar;
@@ -499,7 +506,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.raisedRetry:
                 mPrgLoading.setVisibility(View.VISIBLE);
                 haveResultView();
@@ -507,6 +514,50 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                 break;
             default:
                 break;
+        }
+    }
+
+    public class SyncShowAd extends AsyncTask<Void, Void, Void> {
+        AdView adView;
+        AdRequest adRequest, interStitialAdRequest;
+        InterstitialAd interstitialAd;
+        int interstitialTrigger;
+
+        public SyncShowAd(AdView adView) {
+            this.adView = adView;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            if (isAdmobVisible) {
+                adRequest = new AdRequest.Builder()
+                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                        .addTestDevice(getResources().getString(R.string.test_device_id))
+                        .build();
+
+                interstitialAd = new InterstitialAd(getActivity());
+                interstitialAd.setAdUnitId(getActivity().getResources()
+                        .getString(R.string.interstitial_ad_id));
+                interstitialTrigger = Utils.loadIntPreferences(
+                        getActivity(), Utils.ARG_ADMOB_PREFERENCE, Utils.ARG_TRIGGER);
+
+                if (interstitialTrigger == Utils.ADD_TRIGGER_VALUE) {
+                    interStitialAdRequest = new AdRequest.Builder()
+                            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                            .addTestDevice(getResources().getString(R.string.test_device_id))
+                            .build();
+                    Utils.saveIntPreferences(getActivity(), Utils.ARG_ADMOB_PREFERENCE, Utils.ARG_TRIGGER, 1);
+                }else {
+                    Utils.saveIntPreferences(getActivity(), Utils.ARG_ADMOB_PREFERENCE, Utils.ARG_TRIGGER,
+                            (interstitialTrigger + 1));
+                }
+            }
+            return null;
         }
     }
 }
