@@ -20,6 +20,7 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -97,6 +98,8 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
 
         adView = view.findViewById(R.id.adView);
         isAdmobVisible = Utils.admobVisibility(adView, Utils.IS_ADMOB_VISIBLE);
+
+        new SyncShowAd(adView).execute();
 
         btnRetry.setOnClickListener(this);
         mPrgLoading.setColorSchemeResources(R.color.accent_color);
@@ -546,7 +549,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                 interstitialTrigger = Utils.loadIntPreferences(
                         getActivity(), Utils.ARG_ADMOB_PREFERENCE, Utils.ARG_TRIGGER);
 
-                if (interstitialTrigger == Utils.ADD_TRIGGER_VALUE) {
+                if (interstitialTrigger == Utils.ARG_TRIGGER_VALUE) {
                     interStitialAdRequest = new AdRequest.Builder()
                             .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                             .addTestDevice(getResources().getString(R.string.test_device_id))
@@ -558,6 +561,35 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                 }
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (isAdmobVisible) {
+                adView.loadAd(adRequest);
+                if (interstitialTrigger == Utils.ARG_TRIGGER_VALUE) {
+                    interstitialAd.loadAd(interStitialAdRequest);
+                    interstitialAd.setAdListener(new AdListener() {
+                        @Override
+                        public void onAdClosed() {
+                            super.onAdClosed();
+                        }
+
+                        @Override
+                        public void onAdFailedToLoad(int errorCode) {
+                            super.onAdFailedToLoad(errorCode);
+                        }
+
+                        @Override
+                        public void onAdLoaded() {
+                            if (interstitialAd.isLoaded()) {
+                                interstitialAd.show();
+                            }
+                        }
+                    });
+                }
+            }
         }
     }
 }
