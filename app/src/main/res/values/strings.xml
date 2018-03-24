@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">YouTubeClient</string>
+    <string name="app_name" translatable="false">YTC</string>
 
     <string name="youtube_apikey" translatable="false">AIzaSyBPlFWTCbjd3__KeCo5k1xNprj_0KxW084</string>
     <string name="googleplay_url" translatable="false">https://play.google.com/store/apps/details?id=de.android.ayrathairullin.youtubeclient</string>
