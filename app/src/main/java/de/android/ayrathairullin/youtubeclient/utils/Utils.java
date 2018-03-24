@@ -67,8 +67,8 @@ public class Utils {
     public static final int ARG_NUMBER_OF_NEW_VIDEO = 1;
     public static final String ARG_TRIGGER = "trigger";
     public static final int ARG_TRIGGER_VALUE = 5;
-    public static final boolean IS_ADMOB_VISIBLE = true;
-//    public static final boolean IS_ADMOB_IN_DEBUG = true; // TODO: change this value before release
+    public static final boolean IS_ADMOB_VISIBLE = false;
+//    public static final boolean IS_ADMOB_IN_DEBUG = true; //
     public static final String ARG_ADMOB_PREFERENCE = "admobPreference";
 
     public static void saveIntPreferences(Context context, String key, String param, int value) {

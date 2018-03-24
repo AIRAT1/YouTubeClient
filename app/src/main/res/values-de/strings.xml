@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about">Über die Anwendung</string>
+
+    <string name="no_result">Kein Video</string>
+    <string name="no_internet_connection">Überprüfen Sie Ihre Internetverbindung</string>
+    <string name="response_error">Die Zeitüberschreitung ist abgelaufen oder der Server ist in Wartung</string>
+    <string name="error_player">Fehler beim Initialisieren des YouTube-Players (%1$s)</string>
+
+    <string name="retry">Versuchen Sie es erneut</string>
+
+    <string name="date_util_term_less">mehr als</string>
+
+    <string name="date_util_unit_minute">Minuten</string>
+    <string name="date_util_unit_minuta">Minuten</string>
+    <string name="date_util_unit_minutes">Minuten</string>
+    <string name="date_util_unit_hour">Stunden</string>
+    <string name="date_util_unit_hours">Stunden</string>
+    <string name="date_util_unit_day">Tage</string>
+    <string name="date_util_unit_daya">Tage</string>
+    <string name="date_util_unit_days">Tage</string>
+    <string name="date_util_unit_month">Monate</string>
+    <string name="date_util_unit_months">Monate</string>
+    <string name="date_util_unit_year">Jahren</string>
+    <string name="date_util_unit_years">Jahren</string>
+
+    <string name="date_util_prefix_about">ungefähr</string>
+    <string name="date_util_prefix_over">mehr als</string>
+    <string name="date_util_prefix_almost">ungefähr</string>
+
+    <string name="date_util_suffix">zurück</string>
+
+    <string name="pref_app_title">Über die Anwendung</string>
+    <string name="pref_app_summary">YouTube-Kanal von Lindsey Stirling</string>
+    <string name="pref_version_title">Build-Version</string>
+    <string name="pref_version_summary">1.0</string>
+    <string name="pref_developer_title">Entwickler</string>
+    <string name="pref_developer_summary">AIRIZZIO</string>
+    <string name="pref_share_title">Teilen Sie die App</string>
+    <string name="pref_share_summary">Erzähle deinen Freunden von dieser App</string>
+    <string name="pref_rate_review_title">Bewerten Sie diese Anwendung</string>
+    <string name="pref_rate_review_summary">Bewerten Sie die App und hinterlassen Sie eine Bewertung auf GooglePlay</string>
+
+    <string name="share_to">Teilen Sie</string>
+        <string name="subject">Ich empfehle die Anwendung von AIRIZZIO!</string>
+    <string name="message">Sie können die Anwendung herunterladen in </string>
+
+    <string name="new_videos">Alle Videos</string>
+</resources>

@@ -79,7 +79,7 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
     private View mCoordinator;
 
     public interface OnVideoSelectedListener {
-        public void onVideoSelected(String ID);
+        void onVideoSelected(String ID);
     }
 
     @Override
@@ -153,15 +153,14 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                         new ItemTouchListenerAdapter.RecyclerViewOnItemClickListener() {
                             @Override
                             public void onItemClick(RecyclerView parent, View clickedView, int position) {
-
                                 if (position < mVideoData.size()) {
-
                                     mCallback.onVideoSelected(mVideoData.get(position).get(Utils.KEY_VIDEO_ID));
                                 }
                             }
 
                             @Override
                             public void onItemLongClick(RecyclerView recyclerView, View view, int i) {
+                                // TODO add realization
                             }
                         });
 
