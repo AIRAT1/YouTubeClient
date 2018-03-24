@@ -159,14 +159,14 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
                             }
 
                             @Override
-                            public void onItemLongClick(RecyclerView recyclerView, View view, int i) {
+                            public void onItemLongClick(RecyclerView recyclerView, View view, final int position) {
                                 // TODO add realization
+                                String youtubeLink = "https://www.youtube.com/watch?v=" + mVideoData.get(position).get(Utils.KEY_VIDEO_ID);
                             }
                         });
 
 
         mUltimateRecyclerView.mRecyclerView.addOnItemTouchListener(itemTouchListenerAdapter);
-
 
         getVideoData();
 
@@ -177,8 +177,6 @@ public class FragmentChannelVideo extends Fragment implements View.OnClickListen
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-
         try {
             mCallback = (OnVideoSelectedListener) activity;
         } catch (ClassCastException e) {
