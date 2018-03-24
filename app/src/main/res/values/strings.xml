@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">YouTubeClient</string>
 
     <string name="youtube_apikey" translatable="false">AIzaSyBPlFWTCbjd3__KeCo5k1xNprj_0KxW084</string>
-    <string name="googleplay_url" translatable="false">https://play.google.com/store/apps/details?id=e.android.ayrathairullin.youtubeclient</string>
+    <string name="googleplay_url" translatable="false">https://play.google.com/store/apps/details?id=de.android.ayrathairullin.youtubeclient</string>
     <string name="banner_ad_id" translatable="false">ca-app-pub-6708703349449969/5487942007</string>
     <string name="interstitial_ad_id" translatable="false">ca-app-pub-6708703349449969/3125023617</string>
     <string name="test_device_id" translatable="false">30D9300605DD60CE60905D4B3C11B63F</string>

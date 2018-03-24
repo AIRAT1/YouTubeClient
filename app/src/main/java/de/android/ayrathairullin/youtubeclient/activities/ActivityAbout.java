@@ -15,7 +15,6 @@ public class ActivityAbout extends PreferenceActivity
     @Override
     protected void onCreate(final Bundle savedInstanceState)
     {
-
         setTheme(R.style.AppTheme_Dark);
         super.onCreate(savedInstanceState);
 
