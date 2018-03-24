@@ -33,7 +33,7 @@
     <!--</string-array>-->
 
     <!--Lindsey Stirling youtube channel-->
-    <string-array name="channel_names">
+    <string-array name="channel_names" translatable="false">
         <item>Lindsey Stirling</item>
         <item>Original Music Videos</item>
         <item>Cool Collabs</item>
@@ -45,7 +45,7 @@
         <item>Lindsey Live</item>
     </string-array>
 
-    <string-array name="video_types">
+    <string-array name="video_types" translatable="false">
         <item>1</item>
         <item>2</item>
         <item>2</item>
@@ -57,7 +57,7 @@
         <item>2</item>
     </string-array>
 
-    <string-array name="channel_id">
+    <string-array name="channel_id" translatable="false">
         <item>UCyC_4jvPzLiSkJkLIkA7B8g</item>
         <item>PL0805FB61D7503BC2</item>
         <item>PLETuopLfmKSNa6FuUGxbPZN0QZWBA6CIW</item>
