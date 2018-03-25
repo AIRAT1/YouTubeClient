@@ -11,24 +11,24 @@
 
     <string name="date_util_term_less">mehr als</string>
 
-    <string name="date_util_unit_minute">Minuten</string>
+    <string name="date_util_unit_minute">Minute</string>
     <string name="date_util_unit_minuta">Minuten</string>
     <string name="date_util_unit_minutes">Minuten</string>
-    <string name="date_util_unit_hour">Stunden</string>
+    <string name="date_util_unit_hour">Stunde</string>
     <string name="date_util_unit_hours">Stunden</string>
-    <string name="date_util_unit_day">Tage</string>
+    <string name="date_util_unit_day">Tag</string>
     <string name="date_util_unit_daya">Tage</string>
     <string name="date_util_unit_days">Tage</string>
     <string name="date_util_unit_month">Monate</string>
     <string name="date_util_unit_months">Monate</string>
-    <string name="date_util_unit_year">Jahren</string>
+    <string name="date_util_unit_year">Jahr</string>
     <string name="date_util_unit_years">Jahren</string>
 
     <string name="date_util_prefix_about">ungefähr</string>
     <string name="date_util_prefix_over">mehr als</string>
     <string name="date_util_prefix_almost">ungefähr</string>
 
-    <string name="date_util_suffix">zurück</string>
+    <string name="date_util_suffix">vor</string>
 
     <string name="pref_app_title">Über die Anwendung</string>
     <string name="pref_app_summary">YouTube-Kanal von Lindsey Stirling</string>
